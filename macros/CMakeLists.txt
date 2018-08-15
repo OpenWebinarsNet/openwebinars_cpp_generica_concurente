@@ -3,4 +3,4 @@ project(macros)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(macros main.cpp)
+add_executable(macros main.cpp macro_header.h)
