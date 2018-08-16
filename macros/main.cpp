@@ -33,32 +33,37 @@ INIT_10(b)
 
 int main() {
 
-    //macro substitution
-    std::cout << MY_FST_MACRO << std::endl;
+    //macro define
+    std::cout << "________DEFINE________" << std::endl;
+    std::cout << "MY_FST_MACRO  = " << MY_FST_MACRO << std::endl;
 
+    std::cout << "________CONCAT________" << std::endl;
     //macro concat
-    std::cout << my_var_a << std::endl;
-    std::cout << my_var_b << std::endl;
+    std::cout << "my_var_a = "<< my_var_a << std::endl;
+    std::cout << "my_var_b = "<< my_var_b << std::endl;
 
+
+    std::cout << "________REDEFINE________" << std::endl;
     //macro redefinition
     //std::cout << MY_REDEFINED_MACRO(10) << std::endl; doesnt work, is redifined
-    std::cout << MY_REDEFINED_MACRO(10, 10) << std::endl;
+    std::cout << "MY_REDEFINED_MACRO(10, 10) = " << MY_REDEFINED_MACRO(10, 10) << std::endl;
+
 
     //macro recursive error, doesn't work
     //std::cout << FAC(10) << std::endl;
 
+
+    std::cout << "________SCOPE________" << std::endl;
     //fun with macros...what is the output
-    std::cout << SQUARE(10)  << std::endl; //10*10 = 100
-    std::cout << SQUARE(5+2) << std::endl; //7*7 = 49? or 5+2*5+2?
-
-    std::cout << SQUARE(5+2) << std::endl; //7*7 = 49? or 5+2*5+2?
+    std::cout << "SQUARE(10)  = " << SQUARE(10)  << std::endl; //10*10 = 100
+    std::cout << "SQUARE(5+2) = " << SQUARE(5+2) << std::endl; //7*7 = 49? or 5+2*5+2?
 
 
-
+    std::cout << "________CONDITIONAL________" << std::endl;
     //macro conditional compilation
-    std::cout << MY_VAR_MACRO << std::endl;
+    std::cout << "MY_VAR_MACRO  = " << MY_VAR_MACRO << std::endl;
 
-
+    std::cout << "________UTILS________" << std::endl;
     //macro utils
     for(auto& s : {__DATE__, __TIME__, __FILE__, std::to_string(__LINE__).c_str()}){
         std::cout << s << std::endl;
