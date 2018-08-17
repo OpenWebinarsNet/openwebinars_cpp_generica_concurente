@@ -77,4 +77,17 @@ public:
     }
 };
 
+template<class T>
+class Singleton
+{
+private:
+    static T* m_instance = nullptr;
+    Singleton(){};
+public:
+    static T* getInstance()
+    {
+        if(!m_instance) {m_instance = new T();}
+        return m_instance;
+    }
+};
 #endif //TEMPLATES_EXAMPLE_HPP
