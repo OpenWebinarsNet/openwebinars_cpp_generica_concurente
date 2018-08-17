@@ -1,7 +1,8 @@
 #include <iostream>
 #include <typeinfo>
 #include <functional>
-
+#include <memory>
+#include "example.hpp"
 
 //template basico
 template<class T>
@@ -32,8 +33,10 @@ T&& add(const T& a, const T& b)
 
 //templating nontype objects
 template <unsigned int N=10>
-std::function<int&&(const int& n)> build_add_function() {
-    return [](const int& n)->int&&{std::move(n+N);};
+std::function<int(const int& n)> build_add_function() {
+    return [](const int& n)->int{
+        return n+N;
+    };
 }
 
 
@@ -71,6 +74,16 @@ int main() {
     std::cout << "Function factory template using non-typed argument" << std::endl;
     auto f  = build_add_function();
     auto ff = build_add_function<20>();
-    std::cout << f(1) << " <-> " << ff(1) << std::endl;
+    int v{f(1)};
+    int vv{ff(1)};
+    std::cout << v << " <-> " << vv << std::endl;
+
+
+    std::cout << "Templated list example" << std::endl;
+    MyList<int> l;
+    for (auto& n : {9,8,7,6,5,4,3,2,1}) {
+        l.append(n);
+    }
+    std::cout << l << std::endl;
     return 0;
 }
