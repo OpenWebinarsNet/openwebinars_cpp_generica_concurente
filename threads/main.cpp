@@ -3,7 +3,10 @@
 #include <mutex>
 #include <vector>
 #include <atomic>
-
+#include <functional>
+#include <chrono>
+#include <cstdlib>
+#include "workers.hpp"
 
 void t_print_example()
 {
@@ -66,5 +69,22 @@ int main() {
     t_print_example_with_mutex();
     std::cout << "Threading with atomic print example" << std::endl;
     t_print_example_with_atomic();
+    std::cout << "Threading map example" << std::endl;
+    std::cout << "Concurrent threads: " << std::thread::hardware_concurrency() << std::endl;
+    ThreadPool pool;
+    std::vector<int> args{0,1,2,3,4,5,6,7,8,9,8,7,6,5,4,3,2,1,0};
+    auto res = pool.map<std::function<int(int)>, int, int>
+    (
+     [](int i)
+     {
+         std::this_thread::sleep_for(std::chrono::seconds(rand()%2));
+         return i +10;
+     },
+     args
+    );
+    for (int& r: res)
+    {
+        std::cout << r << std::endl;
+    }
     return 0;
 }

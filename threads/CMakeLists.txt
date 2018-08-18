@@ -3,7 +3,7 @@ project(threads)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(threads main.cpp workers.h++)
+add_executable(threads main.cpp workers.hpp)
 
 TARGET_LINK_LIBRARIES(
         threads
